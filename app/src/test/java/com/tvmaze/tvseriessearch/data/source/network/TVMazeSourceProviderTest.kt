@@ -1,11 +1,7 @@
 package com.tvmaze.tvseriessearch.data.source.network
 
-import com.tvmaze.tvseriessearch.data.ShowList
 import com.tvmaze.tvseriessearch.data.source.SourceEndpoints
 import org.junit.Test
-import retrofit2.Call
-import retrofit2.Callback
-import retrofit2.Response
 
 class TVMazeSourceProviderTest {
 
@@ -13,22 +9,13 @@ class TVMazeSourceProviderTest {
     fun testTVMazeSourceProvider_returnShowsSuccessfully() {
         val request = TVMazeSourceProvider.buildProvider(SourceEndpoints::class.java)
 
-        val call = request.getShows("girls")
+        val response = request.getShows("girls").execute()
 
-        call.enqueue(object : Callback<ShowList> {
-            override fun onResponse(call: Call<ShowList>, response: Response<ShowList>) {
-                assert(response.isSuccessful)
+        assert(response.isSuccessful) { "Request unsuccessful, error code: ${response.code()}" }
 
-                val showList = response.body()
+        val showList = response.body()
 
-                assert(showList != null)
-                assert(showList?.results != null)
-                assert(showList?.results?.isNotEmpty() == true)
-            }
-
-            override fun onFailure(call: Call<ShowList>, t: Throwable) {
-                assert(false)
-            }
-        })
+        assert(showList != null) { "Result is null" }
+        assert(showList?.isNotEmpty() == true) { "Result is empty" }
     }
 }

@@ -14,9 +14,3 @@ data class ShowWithScore(
     val show: Show
 ) {
 }
-
-data class ShowList(
-    val results: List<ShowWithScore>
-){
-
-}
