@@ -15,6 +15,7 @@ import com.tvmaze.tvseriessearch.ui.theme.TVSeriesSearchTheme
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+
         setContent {
             TVSeriesSearchTheme {
                 // A surface container using the 'background' color from the theme
