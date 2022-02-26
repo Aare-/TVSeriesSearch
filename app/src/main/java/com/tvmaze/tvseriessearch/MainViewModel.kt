@@ -12,7 +12,7 @@ import javax.inject.Inject
 
 @HiltViewModel
 class MainViewModel @Inject constructor(
-    val dataSource: SourceProvider
+    private val dataSource: SourceProvider
 ) : ViewModel() {
 
     val showSearchResult: MutableLiveData<List<ShowWithScore>> by lazy {
