@@ -5,7 +5,6 @@ import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 
 object TVMazeSourceProvider {
-
     private val client = OkHttpClient.Builder().build()
 
     private val retrofit = Retrofit.Builder()
@@ -15,6 +14,6 @@ object TVMazeSourceProvider {
         .build()
 
     fun<T> buildProvider(service: Class<T>): T {
-        return retrofit.create(service);
+        return retrofit.create(service)
     }
 }

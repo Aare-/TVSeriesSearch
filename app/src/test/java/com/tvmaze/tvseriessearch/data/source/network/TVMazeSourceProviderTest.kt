@@ -1,13 +1,13 @@
 package com.tvmaze.tvseriessearch.data.source.network
 
-import com.tvmaze.tvseriessearch.data.source.SourceEndpoints
+import com.tvmaze.tvseriessearch.data.source.SourceProvider
 import org.junit.Test
 
 class TVMazeSourceProviderTest {
 
     @Test
     fun testTVMazeSourceProvider_returnShowsSuccessfully() {
-        val request = TVMazeSourceProvider.buildProvider(SourceEndpoints::class.java)
+        val request = TVMazeSourceProvider.buildProvider(SourceProvider::class.java)
 
         val response = request.getShows("girls").execute()
 
