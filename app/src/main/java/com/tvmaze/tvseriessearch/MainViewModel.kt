@@ -25,7 +25,7 @@ class MainViewModel @Inject constructor(
 
     private val exceptionHandler = CoroutineExceptionHandler { _, exception -> Log.d("MainViewModel", exception.toString())}
 
-    var currentSearchQuery: MutableStateFlow<String> = MutableStateFlow("")
+    val currentSearchQuery: MutableStateFlow<String> = MutableStateFlow("")
 
     val showSearchResult: LiveData<List<ShowWithScore>> = _showSearchResult
 
