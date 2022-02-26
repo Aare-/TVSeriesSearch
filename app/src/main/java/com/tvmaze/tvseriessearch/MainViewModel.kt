@@ -17,17 +17,17 @@ class MainViewModel @Inject constructor(
     private val dataSource: SourceProvider
 ) : ViewModel() {
 
-    var currentSearchQuery: MutableStateFlow<String> = MutableStateFlow("")
-
     private val _showSearchResult: MutableLiveData<List<ShowWithScore>> by lazy {
         MutableLiveData<List<ShowWithScore>>(emptyList())
     }
 
-    val showSearchResult: LiveData<List<ShowWithScore>> = _showSearchResult
-
     private var pendingQuery: Job? = null
 
     private val exceptionHandler = CoroutineExceptionHandler { _, exception -> Log.d("MainViewModel", exception.toString())}
+
+    var currentSearchQuery: MutableStateFlow<String> = MutableStateFlow("")
+
+    val showSearchResult: LiveData<List<ShowWithScore>> = _showSearchResult
 
     fun postNewShowSearchQuery(query: String) {
         // allow only the latest query to complete, we don't care about old query once new one is submitted

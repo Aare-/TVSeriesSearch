@@ -82,8 +82,8 @@ class MainActivity : ComponentActivity() {
 
     @Composable
     fun ShowsList() {
-        var searchResultList = viewModel.showSearchResult.observeAsState()
-        var listState = rememberLazyListState()
+        val searchResultList = viewModel.showSearchResult.observeAsState()
+        val listState = rememberLazyListState()
 
         LazyColumn(
             state = listState,
@@ -108,8 +108,7 @@ class MainActivity : ComponentActivity() {
         ) {
             Row (
                 modifier = Modifier.padding(10.dp, 5.dp)
-            )
-            {
+            ) {
                 Card(
                     modifier = Modifier.size(48.dp),
                     shape = CircleShape,
