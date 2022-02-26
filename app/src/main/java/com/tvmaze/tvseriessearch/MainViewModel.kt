@@ -19,7 +19,7 @@ class MainViewModel @Inject constructor(
 
     var currentSearchQuery: MutableStateFlow<String> = MutableStateFlow("")
 
-    val _showSearchResult: MutableLiveData<List<ShowWithScore>> by lazy {
+    private val _showSearchResult: MutableLiveData<List<ShowWithScore>> by lazy {
         MutableLiveData<List<ShowWithScore>>(emptyList())
     }
 
