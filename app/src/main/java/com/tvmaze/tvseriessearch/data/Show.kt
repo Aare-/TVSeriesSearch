@@ -12,7 +12,7 @@ data class Show(
     val name: String,
     val genres: List<String>,
     val weight: Int,
-    val image: ImageData
+    val image: ImageData?
 ) {
 }
 

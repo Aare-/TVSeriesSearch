@@ -29,6 +29,7 @@ import androidx.compose.ui.text.font.FontStyle
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
+import coil.compose.rememberImagePainter
 
 @AndroidEntryPoint
 class MainActivity : ComponentActivity() {
@@ -98,6 +99,10 @@ class MainActivity : ComponentActivity() {
 
     @Composable
     fun ShowListItem(showWithScore: ShowWithScore) {
+        val painter = rememberImagePainter(
+            data = showWithScore.show.image?.medium,
+        )
+
         Card(
             modifier = Modifier.padding(horizontal = 8.dp, vertical = 8.dp).fillMaxWidth(),
             elevation = 2.dp,
@@ -113,14 +118,15 @@ class MainActivity : ComponentActivity() {
                     elevation = 2.dp
                 ) {
                     Image(
-                        painter = painterResource(id = R.drawable.ic_launcher_background),
-                        contentDescription = "",
+                        painter = painter,
+                        contentDescription = null,
                         contentScale = ContentScale.Crop,
-                        modifier = Modifier.fillMaxSize()
+                        modifier = Modifier.size(120.dp)
                     )
                 }
+                Spacer(modifier = Modifier.width(5.dp))
                 Column(
-                    modifier = Modifier.align(Alignment.CenterVertically).padding(10.dp, 0.dp)
+                    modifier = Modifier.align(Alignment.CenterVertically)
                 ) {
                     Text(
                         text = showWithScore.show.name,
