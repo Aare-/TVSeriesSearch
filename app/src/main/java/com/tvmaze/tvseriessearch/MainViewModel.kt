@@ -1,12 +1,14 @@
 package com.tvmaze.tvseriessearch
 
 import android.util.Log
+import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.tvmaze.tvseriessearch.data.ShowWithScore
 import com.tvmaze.tvseriessearch.data.source.SourceProvider
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.*
+import kotlinx.coroutines.flow.MutableStateFlow
 import retrofit2.awaitResponse
 import javax.inject.Inject
 
@@ -15,9 +17,13 @@ class MainViewModel @Inject constructor(
     private val dataSource: SourceProvider
 ) : ViewModel() {
 
-    val showSearchResult: MutableLiveData<List<ShowWithScore>> by lazy {
-        MutableLiveData<List<ShowWithScore>>()
+    var currentSearchQuery: MutableStateFlow<String> = MutableStateFlow("")
+
+    val _showSearchResult: MutableLiveData<List<ShowWithScore>> by lazy {
+        MutableLiveData<List<ShowWithScore>>(emptyList())
     }
+
+    val showSearchResult: LiveData<List<ShowWithScore>> = _showSearchResult
 
     private var pendingQuery: Job? = null
 
@@ -32,9 +38,14 @@ class MainViewModel @Inject constructor(
 
             withContext(Dispatchers.Main) {
                 if (result.isSuccessful)
-                    showSearchResult.postValue(result.body()!!)
+                    _showSearchResult.postValue(result.body()!!)
             }
         }
+    }
+
+    fun clearShowSearch() {
+        pendingQuery?.cancel()
+        _showSearchResult.postValue(emptyList())
     }
 
     override fun onCleared() {
